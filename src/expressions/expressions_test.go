@@ -15,4 +15,21 @@ func Test(t *testing.T) {
 		must.Equal(src, fmt.Sprint(dst))
 	}))
 
+	t.Run("ConditionalExpression", test.Case(func(ctx context.Context) {
+		src1, src2, src3 := "12345", "7899", "11111"
+		dst := ConditionalExpression{
+			NameExpression{src1},
+			NameExpression{src2},
+			NameExpression{src3},
+		}
+		must.Equal(fmt.Sprintf("(%s ? %s : %s)", src1, src2, src3), fmt.Sprint(dst))
+	}))
+	t.Run("AssignExpression", test.Case(func(ctx context.Context) {
+		src1, src2 := "1234", "5678"
+		dst := AssignExpression{
+			src1,
+			NameExpression{src2},
+		}
+		must.Equal(fmt.Sprintf("(%s = %s)", src1, src2), fmt.Sprint(dst))
+	}))
 }

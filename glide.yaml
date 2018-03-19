@@ -1,0 +1,4 @@
+package: .
+import:
+- package: github.com/modern-go/test
+  version: ^1.0.0

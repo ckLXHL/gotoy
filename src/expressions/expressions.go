@@ -1,11 +1,16 @@
 package expressions
 
-import "fmt"
+import (
+	"fmt"
+	"github.com/ckLXHL/gotoy/src/token"
+)
 
 //expression格式化接口
-type ExpressionIf fmt.Stringer
+type Expression interface {
+	fmt.Stringer
+}
 
-//名称表达式
+//基础表达式
 type NameExpression struct {
 	name string
 }
@@ -13,22 +18,37 @@ type NameExpression struct {
 func (ne NameExpression) String() string {
 	return ne.name
 }
-
+/*
 //条件表达式
 type ConditionalExpression struct{
-	condition, thenArm, elseArm ExpressionIf
+	condition, thenExp, elseExp ExpressionIf
 }
 
 func (ce ConditionalExpression) String() string {
-	return fmt.Sprintf("(%s ? %s : %s)", ce.condition, ce.thenArm, ce.elseArm)
+	return fmt.Sprintf("(%s ? %s : %s)", ce.condition, ce.thenExp, ce.elseExp)
 }
 
 //赋值表达式
 type AssignExpression struct {
-	name string
-	right NameExpression
+	name NameExpression
+	value NameExpression
 }
 
 func (ae AssignExpression) String() string {
-	return fmt.Sprintf("(%s = %s)", ae.name, ae.right)
+	return fmt.Sprintf("(%s = %s)", ae.name, ae.value)
+}
+
+//括号表达式
+//type ParenthesesExpression struct {
+
+//}*/
+
+type OperatorExpression struct {
+	left NameExpression
+	operator token.Token
+	right NameExpression
+}
+
+func (oe OperatorExpression) String() string {
+	return fmt.Sprintf("(%s %s %s)", oe.left, oe.operator, oe.right)
 }

@@ -1,7 +1,12 @@
 package parser
 
-type PrefixParserIf interface {
-	//parse(parser Parser, token Token) ExpressionIf
+import (
+	"github.com/ckLXHL/gotoy/src/token"
+	"github.com/ckLXHL/gotoy/src/expressions"
+)
+
+type PrefixParser interface {
+	parse(p Parser, t token.Token) expressions.Expression
 }
 
 // prefixtype
